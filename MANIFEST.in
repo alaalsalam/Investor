@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include investor *.css
+recursive-include investor *.csv
+recursive-include investor *.html
+recursive-include investor *.ico
+recursive-include investor *.js
+recursive-include investor *.json
+recursive-include investor *.md
+recursive-include investor *.png
+recursive-include investor *.py
+recursive-include investor *.svg
+recursive-include investor *.txt
+recursive-exclude investor *.pyc
