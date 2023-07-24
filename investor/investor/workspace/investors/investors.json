@@ -1,0 +1,122 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"pi98JLeszw\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Investors</span>\",\"col\":12}},{\"id\":\"yatbfsOLfW\",\"type\":\"card\",\"data\":{\"card_name\":\"Investor\",\"col\":4}},{\"id\":\"bqNMQ1L_zv\",\"type\":\"card\",\"data\":{\"card_name\":\"Transferors\",\"col\":4}},{\"id\":\"lrjhZtqd34\",\"type\":\"card\",\"data\":{\"card_name\":\"Project\",\"col\":4}}]",
+ "creation": "2023-03-14 22:07:42.720518",
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "income",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "Investors",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Investor",
+   "link_count": 4,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Investor",
+   "link_count": 0,
+   "link_to": "Investor",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Investor Group",
+   "link_count": 0,
+   "link_to": "Investor Group",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "investor Contract",
+   "link_count": 0,
+   "link_to": "investor Contract",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Investor Settings",
+   "link_count": 0,
+   "link_to": "Investor Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Project",
+   "link_count": 1,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Project",
+   "link_count": 0,
+   "link_to": "Project",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Transferors",
+   "link_count": 2,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Transferors",
+   "link_count": 0,
+   "link_to": "Transferors",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Transferors Group",
+   "link_count": 0,
+   "link_to": "Transferors Group",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2023-04-12 00:36:25.157096",
+ "modified_by": "Administrator",
+ "module": "Investor",
+ "name": "Investors",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 19.0,
+ "shortcuts": [],
+ "title": "Investors"
+}
