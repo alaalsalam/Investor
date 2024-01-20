@@ -1,0 +1,27 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "creation": "2023-11-15 16:52:40.425684",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": "\u0646\u062c\u0645 \u0627\u0644\u0645\u062d\u064a\u0637 \u0631\u0633\u0645\u064a",
+ "modified": "2023-11-15 19:04:25.482211",
+ "modified_by": "Administrator",
+ "module": "Investor",
+ "name": "Landed Cost Voucher Report",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Landed Cost Voucher",
+ "report_name": "Landed Cost Voucher Report",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Stock Manager"
+  }
+ ]
+}

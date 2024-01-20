@@ -1,0 +1,207 @@
+{
+ "charts": [
+  {
+   "chart_name": "Expense Claims",
+   "label": "Expense Claims"
+  }
+ ],
+ "content": "[{\"id\":\"L2zVuWBp7u\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Expense Claims\",\"col\":12}},{\"id\":\"xrNOam-5qD\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"WeY2C9ArOK\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Your Shortcuts</b></span>\",\"col\":12}},{\"id\":\"iDZGDH96Bx\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Expense Claim\",\"col\":3}},{\"id\":\"zFC6AYv26B\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Dashboard\",\"col\":3}},{\"id\":\"ALah8wGQ6F\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"sQTzb1f7Y_\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Masters &amp; Reports</b></span>\",\"col\":12}},{\"id\":\"DuIKEI2BM-\",\"type\":\"card\",\"data\":{\"card_name\":\"Claims\",\"col\":4}},{\"id\":\"YLUHzAMPPI\",\"type\":\"card\",\"data\":{\"card_name\":\"Advances\",\"col\":4}},{\"id\":\"xcW_x4wuLQ\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}},{\"id\":\"KgfEHHa8pF\",\"type\":\"card\",\"data\":{\"card_name\":\"Accounting Reports\",\"col\":4}}]",
+ "creation": "2023-09-12 20:27:52.263366",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 1,
+ "icon": "expenses",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "Expense Company",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Advances",
+   "link_count": 4,
+   "link_type": "DocType",
+   "onboard": 0,
+   "only_for": "United Arab Emirates",
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Employee Advance",
+   "link_count": 0,
+   "link_to": "Employee Advance",
+   "link_type": "DocType",
+   "onboard": 0,
+   "only_for": "United Arab Emirates",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Payment Entry",
+   "link_count": 0,
+   "link_to": "Payment Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "only_for": "United Arab Emirates",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Journal Entry",
+   "link_count": 0,
+   "link_to": "Journal Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "only_for": "United Arab Emirates",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Additional Salary",
+   "link_count": 0,
+   "link_to": "Additional Salary",
+   "link_type": "DocType",
+   "onboard": 0,
+   "only_for": "United Arab Emirates",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Accounting Reports",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "only_for": "United Arab Emirates",
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Accounts Receivable",
+   "link_count": 0,
+   "link_to": "Accounts Receivable",
+   "link_type": "Report",
+   "onboard": 0,
+   "only_for": "United Arab Emirates",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Accounts Payable",
+   "link_count": 0,
+   "link_to": "Accounts Payable",
+   "link_type": "Report",
+   "onboard": 0,
+   "only_for": "United Arab Emirates",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "General Ledger",
+   "link_count": 0,
+   "link_to": "General Ledger",
+   "link_type": "Report",
+   "onboard": 0,
+   "only_for": "United Arab Emirates",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reports",
+   "link_count": 1,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Unpaid Expense Claim",
+   "link_count": 0,
+   "link_to": "Unpaid Expense Claim",
+   "link_type": "Report",
+   "onboard": 0,
+   "only_for": "United Arab Emirates",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Claims",
+   "link_count": 3,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Expense Entry",
+   "link_count": 0,
+   "link_to": "Expense Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Expense Claim",
+   "link_count": 0,
+   "link_to": "Expense Claim",
+   "link_type": "DocType",
+   "onboard": 0,
+   "only_for": "United Arab Emirates",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Expense Claim Type",
+   "link_count": 0,
+   "link_to": "Expense Claim Type",
+   "link_type": "DocType",
+   "onboard": 0,
+   "only_for": "United Arab Emirates",
+   "type": "Link"
+  }
+ ],
+ "modified": "2023-12-12 04:43:47.991630",
+ "modified_by": "alaalsalam101@gmail.com",
+ "module": "Investor",
+ "name": "Expense Company",
+ "number_cards": [],
+ "owner": "alaalsalam101@gmail.com",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 13.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Dashboard",
+   "link_to": "Expense Claims",
+   "type": "Dashboard"
+  },
+  {
+   "color": "Orange",
+   "doc_view": "List",
+   "format": "{} Pending",
+   "label": "Expense Claim",
+   "link_to": "Expense Claim",
+   "stats_filter": "{\"status\":[\"=\",\"Draft\"]}",
+   "type": "DocType"
+  }
+ ],
+ "title": "Expense Company"
+}

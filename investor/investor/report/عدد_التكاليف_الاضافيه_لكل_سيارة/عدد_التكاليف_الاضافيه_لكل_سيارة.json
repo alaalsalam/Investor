@@ -1,0 +1,28 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2023-10-23 16:48:32.048929",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "json": "{\"filters\":[[\"Landed Cost Voucher\",\"docstatus\",\"!=\",\"2\",false]],\"fields\":[[\"item_code\",\"Landed Cost Item\"],[\"_aggregate_column\",\"Landed Cost Voucher\"]],\"order_by\":\"`tabLanded Cost Voucher`.`modified` desc\",\"add_totals_row\":0,\"page_length\":20,\"column_widths\":{\"Landed Cost Item:item_code\":164,\"_aggregate_column\":200},\"group_by\":{\"group_by\":\"`tabLanded Cost Item`.`item_code`\",\"aggregate_function\":\"count\"}}",
+ "letter_head": "\u0646\u062c\u0645 \u0627\u0644\u0645\u062d\u064a\u0637 \u0631\u0633\u0645\u064a",
+ "modified": "2023-11-15 20:18:32.917978",
+ "modified_by": "Administrator",
+ "module": "Investor",
+ "name": "\u0639\u062f\u062f \u0627\u0644\u062a\u0643\u0627\u0644\u064a\u0641 \u0627\u0644\u0627\u0636\u0627\u0641\u064a\u0647 \u0644\u0643\u0644 \u0633\u064a\u0627\u0631\u0629",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Landed Cost Voucher",
+ "report_name": "\u0639\u062f\u062f \u0627\u0644\u062a\u0643\u0627\u0644\u064a\u0641 \u0627\u0644\u0627\u0636\u0627\u0641\u064a\u0647 \u0644\u0643\u0644 \u0633\u064a\u0627\u0631\u0629",
+ "report_type": "Report Builder",
+ "roles": [
+  {
+   "role": "Stock Manager"
+  }
+ ]
+}

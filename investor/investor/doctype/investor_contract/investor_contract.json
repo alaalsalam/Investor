@@ -9,27 +9,37 @@
  "engine": "InnoDB",
  "field_order": [
   "contract_tab",
-  "party_type",
-  "is_signed",
-  "currency",
-  "amount",
-  "cb_party",
   "party_name",
-  "party_user",
+  "investment_amount",
+  "investment_amount_in_words",
+  "currency",
+  "column_break_fs5sz",
+  "party_type",
+  "posting_date",
+  "company",
+  "contract_type",
   "status",
   "fulfilment_status",
-  "contract_type",
+  "section_break_qaqk2",
+  "project",
+  "project_name",
+  "project_profit",
+  "project_profit_per",
+  "cb_party",
+  "investment_percent",
+  "investment_profit",
+  "investment_profit_per",
+  "profit_and_loss_account_to_project",
+  "is_signed",
   "sb_terms",
   "start_date",
   "cb_date",
   "end_date",
   "sb_signee",
   "signee",
-  "signed_on",
   "cb_user",
+  "signed_on",
   "ip_address",
-  "contract_item_tab",
-  "contract_item",
   "contract_details_tab",
   "section_break_gyawv",
   "contract_dividend_ratios",
@@ -47,6 +57,8 @@
   "document_type",
   "cb_links",
   "document_name",
+  "contract_item_tab",
+  "contract_item",
   "amended_from"
  ],
  "fields": [
@@ -84,12 +96,6 @@
    "reqd": 1
   },
   {
-   "fieldname": "party_user",
-   "fieldtype": "Link",
-   "label": "Party User",
-   "options": "User"
-  },
-  {
    "allow_on_submit": 1,
    "fieldname": "status",
    "fieldtype": "Select",
@@ -109,7 +115,7 @@
    "in_standard_filter": 1,
    "label": "Contract Status",
    "no_copy": 1,
-   "options": "N/A\nUnfulfilled\nPartially Fulfilled\nFulfilled\nLapsed"
+   "options": "Start\nComplete\nN/A\nUnfulfilled\nPartially Fulfilled\nFulfilled\nLapsed"
   },
   {
    "fieldname": "sb_terms",
@@ -117,6 +123,7 @@
    "label": "Contract Period"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "start_date",
    "fieldtype": "Date",
    "label": "Start Date"
@@ -126,6 +133,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "end_date",
    "fieldtype": "Date",
    "label": "End Date"
@@ -161,10 +169,10 @@
    "fieldname": "ip_address",
    "fieldtype": "Data",
    "label": "IP Address",
-   "no_copy": 1,
-   "read_only": 1
+   "no_copy": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "contract_details_tab",
    "fieldtype": "Tab Break",
    "label": "Contract Details"
@@ -294,21 +302,98 @@
    "options": "Currency"
   },
   {
-   "fieldname": "amount",
-   "fieldtype": "Currency",
-   "label": "Amount",
-   "options": "currency"
-  },
-  {
    "fieldname": "contract_type",
    "fieldtype": "Select",
    "label": "Contract Type",
    "options": "Specific\nUnSpecific"
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "project_profit",
+   "fieldtype": "Currency",
+   "label": "Project Profit"
+  },
+  {
+   "fieldname": "investment_amount",
+   "fieldtype": "Currency",
+   "label": " Investment Amount",
+   "options": "currency"
+  },
+  {
+   "fetch_from": "project.project_name",
+   "fieldname": "project_name",
+   "fieldtype": "Data",
+   "label": "Project Name"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "investment_amount_in_words",
+   "fieldtype": "Data",
+   "label": " Investment Amount in Words",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "project_profit_per",
+   "fieldtype": "Percent",
+   "label": "Project Profit %"
+  },
+  {
+   "fetch_from": "project.custom_profit_and_loss_account_to_project",
+   "fieldname": "profit_and_loss_account_to_project",
+   "fieldtype": "Link",
+   "label": "Profit and Loss account to Project",
+   "options": "Account"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "investment_percent",
+   "fieldtype": "Percent",
+   "label": "Investment Percent"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "investment_profit",
+   "fieldtype": "Currency",
+   "label": "Investment profit"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "investment_profit_per",
+   "fieldtype": "Percent",
+   "label": "Investment Profit"
+  },
+  {
+   "fieldname": "column_break_fs5sz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_qaqk2",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date"
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2023-04-03 22:37:48.052465",
+ "modified": "2023-12-23 23:56:35.067458",
  "modified_by": "Administrator",
  "module": "Investor",
  "name": "investor Contract",

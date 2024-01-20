@@ -8,13 +8,22 @@
  "engine": "InnoDB",
  "field_order": [
   "supplier_and_price_defaults_section",
+  "section_break_in6he",
   "investor_master_name",
   "supplier_group",
   "default_currency",
   "column_break_4",
+  "section_break_ep2nw",
+  "default_profit_and_loss_account_to_project",
+  "default_profit_and_loss_account_to_contract",
+  "default_profit_and_loss_account_to_company",
+  "column_break_iauby",
+  "default_income_account",
+  "cost_center",
+  "company",
+  "transaction_settings_section",
   "maintain_same_rate_action",
   "role_to_override_stop_action",
-  "transaction_settings_section",
   "po_required",
   "pr_required",
   "column_break_12",
@@ -161,13 +170,61 @@
    "fieldtype": "Select",
    "label": "Investor Naming By",
    "options": "Investor Name\nNaming Series\nAuto Name"
+  },
+  {
+   "fieldname": "default_profit_and_loss_account_to_project",
+   "fieldtype": "Link",
+   "label": "Default Profit and Loss account to Project",
+   "options": "Account"
+  },
+  {
+   "fieldname": "default_profit_and_loss_account_to_contract",
+   "fieldtype": "Link",
+   "label": "Default Profit and Loss account to Contract",
+   "options": "Account"
+  },
+  {
+   "fieldname": "default_profit_and_loss_account_to_company",
+   "fieldtype": "Link",
+   "label": "Default Profit and Loss account to Company",
+   "options": "Account"
+  },
+  {
+   "fieldname": "section_break_in6he",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_ep2nw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_iauby",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "default_income_account",
+   "fieldtype": "Link",
+   "label": "Default Income Account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "Cost Center",
+   "options": "Cost Center"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
   }
  ],
  "icon": "fa fa-cog",
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-03-14 22:53:27.679559",
+ "modified": "2023-12-19 22:39:55.845983",
  "modified_by": "Administrator",
  "module": "Investor",
  "name": "Investor Settings",

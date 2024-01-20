@@ -1,0 +1,31 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2023-11-15 07:25:49.613915",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "json": "{\"filters\":[[\"Stock Ledger Entry\",\"is_cancelled\",\"=\",0,false]],\"fields\":[[\"name\",\"Stock Ledger Entry\"],[\"item_code\",\"Stock Ledger Entry\"],[\"warehouse\",\"Stock Ledger Entry\"],[\"incoming_rate\",\"Stock Ledger Entry\"],[\"outgoing_rate\",\"Stock Ledger Entry\"],[\"valuation_rate\",\"Stock Ledger Entry\"],[\"stock_value\",\"Stock Ledger Entry\"],[\"stock_value_difference\",\"Stock Ledger Entry\"],[\"voucher_type\",\"Stock Ledger Entry\"],[\"voucher_no\",\"Stock Ledger Entry\"],[\"posting_date\",\"Stock Ledger Entry\"],[\"is_cancelled\",\"Stock Ledger Entry\"]],\"order_by\":\"`tabStock Ledger Entry`.`modified` desc\",\"add_totals_row\":0,\"page_length\":20,\"column_widths\":{\"name\":120,\"item_code\":168,\"warehouse\":100,\"incoming_rate\":88,\"outgoing_rate\":62,\"valuation_rate\":92,\"stock_value\":85,\"stock_value_difference\":99,\"voucher_type\":132,\"voucher_no\":176,\"posting_date\":100},\"group_by\":null}",
+ "letter_head": "\u0646\u062c\u0645 \u0627\u0644\u0645\u062d\u064a\u0637 \u0631\u0633\u0645\u064a",
+ "modified": "2023-11-15 20:18:33.247934",
+ "modified_by": "Administrator",
+ "module": "Investor",
+ "name": "\u062a\u0642\u0631\u064a\u0631 \u062d\u0631\u0643\u0629 \u0627\u0644\u0645\u062e\u0632\u0648\u0646",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Stock Ledger Entry",
+ "report_name": "\u062a\u0642\u0631\u064a\u0631 \u062d\u0631\u0643\u0629 \u0627\u0644\u0645\u062e\u0632\u0648\u0646",
+ "report_type": "Report Builder",
+ "roles": [
+  {
+   "role": "Stock User"
+  },
+  {
+   "role": "Accounts Manager"
+  }
+ ]
+}

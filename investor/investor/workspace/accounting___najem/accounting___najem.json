@@ -619,7 +619,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Reports",
-   "link_count": 4,
+   "link_count": 5,
    "onboard": 0,
    "type": "Card Break"
   },
@@ -664,10 +664,20 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u062a\u0642\u0631\u064a\u0631 \u0627\u0644\u0627\u0633\u062a\u0627\u0630 \u0627\u0644\u0639\u0627\u0644\u0645",
+   "link_count": 0,
+   "link_to": "\u062a\u0642\u0631\u064a\u0631 \u0627\u0644\u0627\u0633\u062a\u0627\u0630 \u0627\u0644\u0639\u0627\u0644\u0645",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2023-07-11 15:56:24.509890",
- "modified_by": "Administrator",
+ "modified": "2023-12-12 04:43:43.232394",
+ "modified_by": "alaalsalam101@gmail.com",
  "module": "Investor",
  "name": "Accounting - Najem",
  "number_cards": [],
@@ -677,7 +687,7 @@
  "quick_lists": [],
  "restrict_to_domain": "",
  "roles": [],
- "sequence_id": 2.0,
+ "sequence_id": 3.0,
  "shortcuts": [
   {
    "doc_view": "",
