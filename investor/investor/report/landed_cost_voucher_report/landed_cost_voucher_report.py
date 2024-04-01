@@ -4,139 +4,86 @@
 import frappe
 from frappe import _
 
-def get_filters():
-    return [
-        {
-            "fieldname": "from_date",
-            "label": _("From Date"),
-            "fieldtype": "Date",
-            "default": frappe.datetime.add_months(frappe.datetime.get_today(), -1),
-            "reqd": 1
-        },
-        {
-            "fieldname": "to_date",
-            "label": _("To Date"),
-            "fieldtype": "Date",
-            "default": frappe.datetime.get_today(),
-            "reqd": 1
-        },
-        {
-            "fieldname": "docstatus",
-            "label": _("docstatus"),
-            "fieldtype": "Select",
-            "options": "\nDraft\nSubmitted\nCancelled",
-            "default": "Submitted"
-        },
-        {
-            "fieldname": "item_code",
-            "label": _("Item Code"),
-            "fieldtype": "Link",
-            "options": "Item"
-        },
-        {
-            "fieldname": "project",
-            "label": _("project"),
-            "fieldtype": "Link",
-            "options": "project"
-        },
-        {
-            "fieldname": "custom_item_code",
-            "label": _("Custom Item Code"),
-            "fieldtype": "Data"
-        },
-        {
-            "fieldname": "amount",
-            "label": _("Amount"),
-            "fieldtype": "Currency"
-        },
-        {
-            "fieldname": "account_currency",
-            "label": _("Account Currency"),
-            "fieldtype": "Link",
-            "options": "Currency"
-        },
-        {
-            "fieldname": "description",
-            "label": _("Description"),
-            "fieldtype": "Data"
-        },
-        {
-            "fieldname": "custom_purchase_invoice",
-            "label": _("Custom Purchase Invoice"),
-            "fieldtype": "Link",
-            "options": "Purchase Invoice"
-        },
-        {
-            "fieldname": "expense_account",
-            "label": _("Expense Account"),
-            "fieldtype": "Link",
-            "options": "Account"
-        }
-    ]
-
-
 def execute(filters=None):
     columns = [
-        _("Name") + ":Link/Landed Cost Voucher:169",
-        _("Docstatus") + "::100",
-        _("Item Code") + "::120",
-        _("Applicable Charges") + "::140",
-        _("Custom Item Code") + "::160",
-        _("Amount") + "::120",
-        _("Account Currency") + "::140",
-        _("Description") + "::180",
-        _("Custom Purchase Invoice") + "::180",
-        _("Expense Account") + "::180",
+        {"label": _("Name"), "fieldname": "name", "fieldtype": "Link", "options": "Landed Cost Voucher", "width": 169},
+        {"label": _("Docstatus"), "fieldname": "docstatus", "fieldtype": "Data", "width": 100},
+        {"label": _("Item Code"), "fieldname": "item_code", "fieldtype": "Data", "width": 120},
+        {"label": _("Applicable Charges"), "fieldname": "applicable_charges", "fieldtype": "Data", "width": 140},
+        {"label": _("Custom Item Code"), "fieldname": "custom_item_code", "fieldtype": "Data", "width": 160},
+        {"label": _("Amount(USD)"), "fieldname": "base_amount", "fieldtype": "Float", "width": 120},
+        {"label": _("Amount"), "fieldname": "amount", "fieldtype": "Float", "width": 120},
+        {"label": _("Account Currency"), "fieldname": "account_currency", "fieldtype": "Data", "width": 140},
+        {"label": _("Description"), "fieldname": "description", "fieldtype": "Data", "width": 180},
+        {"label": _("Custom Purchase Invoice"), "fieldname": "custom_purchase_invoice", "fieldtype": "Data", "width": 180},
+        {"label": _("Expense Account"), "fieldname": "expense_account", "fieldtype": "Data", "width": 180}
     ]
 
-    conditions = "1=1"  # A true condition to start building the WHERE clause
+    conditions = []
+    values = {}
 
     if filters.get("item_code"):
-        conditions += " AND lci.item_code = %(item_code)s"
+        conditions.append("lci.item_code = %(item_code)s")
+        values["item_code"] = filters.get("item_code")
     if filters.get("docstatus"):
-        conditions += " AND lcv.docstatus = %(docstatus)s"
+        conditions.append("lcv.docstatus = %(docstatus)s")
+        values["docstatus"] = filters.get("docstatus")
     if filters.get("project"):
-        conditions += " AND lci.custom_project = %(project)s"
+        conditions.append("lci.custom_project = %(project)s")
+        values["project"] = filters.get("project")
     if filters.get("custom_item_code"):
-        conditions += " AND lctc.custom_item_code = %(custom_item_code)s"
+        conditions.append("lci.custom_item_code = %(custom_item_code)s")
+        values["custom_item_code"] = filters.get("custom_item_code")
     if filters.get("amount"):
-        conditions += " AND lctc.amount = %(amount)s"
+        conditions.append("lci.amount = %(amount)s")
+        values["amount"] = filters.get("amount")
     if filters.get("account_currency"):
-        conditions += " AND lctc.account_currency = %(account_currency)s"
+        conditions.append("lci.account_currency = %(account_currency)s")
+        values["account_currency"] = filters.get("account_currency")
     if filters.get("description"):
-        conditions += " AND lctc.description = %(description)s"
+        conditions.append("lci.description = %(description)s")
+        values["description"] = filters.get("description")
     if filters.get("custom_purchase_invoice"):
-        conditions += " AND lctc.custom_purchase_invoice = %(custom_purchase_invoice)s"
+        conditions.append("lci.custom_purchase_invoice = %(custom_purchase_invoice)s")
+        values["custom_purchase_invoice"] = filters.get("custom_purchase_invoice")
     if filters.get("expense_account"):
-        conditions += " AND lctc.expense_account = %(expense_account)s"
+        conditions.append("lci.expense_account = %(expense_account)s")
+        values["expense_account"] = filters.get("expense_account")
+
+    values["applicable_charges"] = filters.get("applicable_charges")
+
+    conditions_query = " AND ".join(conditions)
+    conditions_query = f"WHERE {conditions_query}" if conditions_query else ""
 
     data = frappe.db.sql(f"""
-        SELECT
-            lcv.name, lcv.docstatus, lci.item_code, lci.applicable_charges,
-            lctc.custom_item_code, lctc.amount, lctc.account_currency, lctc.description,
-            lctc.custom_purchase_invoice, lctc.expense_account
-        FROM
-            `tabLanded Cost Voucher` lcv
-        JOIN
-            `tabLanded Cost Taxes and Charges` lctc ON lcv.name = lctc.parent
-        JOIN
-            `tabLanded Cost Item` lci ON lcv.name = lci.parent
-        WHERE
-            lcv.posting_date BETWEEN %(from_date)s AND %(to_date)s
+    SELECT
+        lcv.name, lcv.docstatus, lci.item_code,
+        CASE 
+            WHEN COUNT(lctc.name) = 1 THEN 
+                CASE
+                    WHEN lci.applicable_charges = %(applicable_charges)s THEN -lctc.amount
+                    ELSE lci.applicable_charges
+                END
+            ELSE
+                CASE
+                    WHEN lci.applicable_charges = %(applicable_charges)s THEN -lctc.amount
+                    ELSE lctc.amount
+                END
+        END AS applicable_charges,
         
-            AND ({conditions} OR {conditions} IS NULL)
-        """, {
-        "from_date": filters.get("from_date"),
-        "to_date": filters.get("to_date"),
-        "docstatus": filters.get("docstatus"),
-        "item_code": filters.get("item_code"),
-        "project": filters.get("project"),
-        "custom_item_code": filters.get("custom_item_code"),
-        "amount": filters.get("amount"),
-        "account_currency": filters.get("account_currency"),
-        "description": filters.get("description"),
-        "custom_purchase_invoice": filters.get("custom_purchase_invoice"),
-        "expense_account": filters.get("expense_account")
-    })
+        lctc.custom_item_code, lctc.base_amount, lctc.amount, lctc.account_currency,
+        lctc.description, lctc.custom_purchase_invoice, lctc.expense_account
+    FROM
+        `tabLanded Cost Voucher` lcv
+    JOIN
+        `tabLanded Cost Taxes and Charges` lctc ON lcv.name = lctc.parent
+    JOIN
+        `tabLanded Cost Item` lci ON lcv.name = lci.parent
+    {conditions_query}
+    GROUP BY
+       lcv.name
+    ORDER BY
+        lcv.name
+""", values,as_dict=True)
 
     return columns, data
