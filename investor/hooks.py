@@ -30,7 +30,7 @@ app_license = "MIT"
 
 # include js in doctype views
 doctype_js = {
-    "Landed Cost Voucher" : "public/js/landed_cost_voucher.js",
+    # "Landed Cost Voucher" : "public/js/landed_cost_voucher.js",
     "Project" : "public/js/project.js"
     }
 
@@ -107,7 +107,7 @@ override_doctype_class = {
 	# "Landed Cost Voucher": "investor.overrides.landed_cost_voucher.LandedCostVoucherCustom",
 	"Period Closing Voucher": "investor.overrides.period_closing_voucher.PeriodClosingVoucherCustom",
 	# "Project": "investor.overrides.project.ProjectCustom"
-	"Journal Entry": "investor.overrides.journal_entry.JournalEntryCustom"
+	# "Journal Entry": "investor.overrides.journal_entry.JournalEntryCustom"
 }
 accounting_dimension_doctypes = [
  	"Period Closing Voucher",
@@ -118,20 +118,20 @@ accounting_dimension_doctypes = [
 # Hook on document methods and events
 
 doc_events = {
-    "Landed Cost Voucher": {
-        "on_submit": "investor.utils.create_purchase_invoice_from_landed_cost",
-        # "validate": "investor.utils.update_item_account",
+    # "Landed Cost Voucher": {
+    #     "on_submit": "investor.utils.create_purchase_invoice_from_landed_cost",
+    #     # "validate": "investor.utils.update_item_account",
        
     
-    },
+    # },
     "Project": {
         "validate": "investor.utils.update_dividend_project_investor",
     
     },
-     "Journal Entry": {
-         "validate": "investor.overrides.journal_entry.set_post_data",
+    #  "Journal Entry": {
+    #      "validate": "investor.overrides.journal_entry.set_post_data",
     
-    },
+    # },
 	# "*": {
 	# 	"on_update": "method",
 	# 	"on_cancel": "method",
@@ -142,24 +142,24 @@ doc_events = {
 # Scheduled Tasks
 # ---------------
 
-scheduler_events = {
-	# "all": [
-	# 	"investor.tasks.all"
-	# ],
-    "daily": [
-		"investor.investor.doctype.investor_contract.investor_contract.update_status_for_contracts",
-	],
+# scheduler_events = {
+# 	# "all": [
+# 	# 	"investor.tasks.all"
+# 	# ],
+#     "daily": [
+# 		"investor.investor.doctype.investor_contract.investor_contract.update_status_for_contracts",
+# 	],
 
-	# "hourly": [
-	# 	"investor.tasks.hourly"
-	# ],
-	# "weekly": [
-	# 	"investor.tasks.weekly"
-	# ],
-	# "monthly": [
-	# 	"investor.tasks.monthly"
-	# ],
-}
+# 	# "hourly": [
+# 	# 	"investor.tasks.hourly"
+# 	# ],
+# 	# "weekly": [
+# 	# 	"investor.tasks.weekly"
+# 	# ],
+# 	# "monthly": [
+# 	# 	"investor.tasks.monthly"
+# 	# ],
+# }
 
 # Testing
 # -------
