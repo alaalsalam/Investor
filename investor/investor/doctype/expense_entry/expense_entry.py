@@ -40,7 +40,7 @@ class ExpenseEntry(AccountsController):
 			for des in self.expenses:
 				if des.description:
 					remark += des.description
-					remark += "| "
+					remark += " && "
     
 			self.remark = remark	
      
@@ -133,7 +133,8 @@ class ExpenseEntry(AccountsController):
 					"against_voucher_type": self.doctype,
 					"against_voucher": self.name,
 					"cost_center": data.cost_center,
-					"project": data.project
+					"project": data.project,
+     				"remarks":data.description
 				}, item=data)
 			)
 

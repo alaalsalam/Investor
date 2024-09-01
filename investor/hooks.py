@@ -30,7 +30,7 @@ app_license = "MIT"
 
 # include js in doctype views
 doctype_js = {
-    # "Landed Cost Voucher" : "public/js/landed_cost_voucher.js",
+    "Landed Cost Voucher" : "public/js/landed_cost_voucher.js",
     "Project" : "public/js/project.js"
     }
 
@@ -118,12 +118,12 @@ accounting_dimension_doctypes = [
 # Hook on document methods and events
 
 doc_events = {
-    # "Landed Cost Voucher": {
-    #     "on_submit": "investor.utils.create_purchase_invoice_from_landed_cost",
-    #     # "validate": "investor.utils.update_item_account",
+    "Landed Cost Voucher": {
+        "on_submit": "investor.utils.create_purchase_invoice_from_landed_cost",
+        # "validate": "investor.utils.update_item_account",
        
     
-    # },
+    },
     "Project": {
         "validate": "investor.utils.update_dividend_project_investor",
     

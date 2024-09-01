@@ -30,6 +30,12 @@ def create_purchase_invoice_from_landed_cost(doc, method):
     if purchase:
         cost_center = purchase[0].cost_center
         project = purchase[0].project
+        project = purchase[0].project
+        custom_is_paid = doc.custom_is_paid
+        custom_mode_of_payment = doc.custom_mode_of_payment
+        custom_paid_amount = doc.custom_paid_amount
+        posting_date = doc.posting_date
+        custom_payment_account = doc.custom_payment_account
     
     for item in doc.items:
         remarks += item.description + ":> "+ str(item.applicable_charges) + "|| "
@@ -37,12 +43,12 @@ def create_purchase_invoice_from_landed_cost(doc, method):
     for tax in doc.taxes:
         if tax.custom_purchase_invoice:
             return
-        purchase_invoice = create_purchase_invoice(tax, cost_center, project)
+        purchase_invoice = create_purchase_invoice(tax, cost_center, project,custom_is_paid,custom_mode_of_payment,custom_paid_amount,posting_date,custom_payment_account)
         remarks += tax.description + "| " 
         try:
             purchase_invoice.remarks = remarks
             purchase_invoice.insert()
-            purchase_invoice.submit()
+            # purchase_invoice.submit()
             # tax.purchase_invoice = purchase_invoice.name
             tax.db_set('custom_purchase_invoice', purchase_invoice.name, update_modified=False)
             # return purchase_invoice.name
@@ -50,7 +56,7 @@ def create_purchase_invoice_from_landed_cost(doc, method):
             error_message = "Error creating purchase invoice for supplier {0}: {1}".format(tax.custom_supplier, str(e))
             frappe.throw(error_message)
 
-def create_purchase_invoice(tax, cost_center, project):
+def create_purchase_invoice(tax, cost_center, project,custom_is_paid,custom_mode_of_payment,custom_paid_amount,posting_date,custom_payment_account):
     """
     Create a new purchase invoice for a specific tax.
 
@@ -64,8 +70,16 @@ def create_purchase_invoice(tax, cost_center, project):
     """
     purchase_invoice = frappe.new_doc("Purchase Invoice")
     purchase_invoice.supplier = tax.custom_supplier
+    purchase_invoice.posting_date = posting_date
+    purchase_invoice.posting_date = posting_date
+    purchase_invoice.set_posting_time = 1
     purchase_invoice.cost_center = cost_center
     purchase_invoice.project = project
+    purchase_invoice.is_paid = custom_is_paid
+    purchase_invoice.mode_of_payment = custom_mode_of_payment
+    purchase_invoice.paid_amount = custom_paid_amount
+    purchase_invoice.cash_bank_account = custom_payment_account
+
     
     purchase_invoice.currency = tax.account_currency
     purchase_invoice.conversion_rate = tax.exchange_rate
