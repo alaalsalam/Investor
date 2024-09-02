@@ -30,7 +30,6 @@ def create_purchase_invoice_from_landed_cost(doc, method):
     if purchase:
         cost_center = purchase[0].cost_center
         project = purchase[0].project
-        project = purchase[0].project
         custom_is_paid = doc.custom_is_paid
         custom_mode_of_payment = doc.custom_mode_of_payment
         custom_paid_amount = doc.custom_paid_amount
