@@ -582,11 +582,7 @@ def update_project_received_totals(doc, method):
 
     frappe.db.set_value("Project", project, "custom_total_received_in_deal", total_received)
 
-    # frappe.msgprint(f"""
-    #     <b>تم تحديث المشروع {project}</b><br>
-    #     💰 <b>إجمالي المقبوض في الصفقة:</b> {total_received}
-    # """, title="تحديث المقبوضات")
-
+   
 
 
 from frappe.utils import nowdate
