@@ -14,7 +14,6 @@ def get_actual_qty(data_dic):
 
 @frappe.whitelist()
 def get_items_from_purchase_receipts_new(self):
-    # get items with 
     self.set("items", [])
     for pr in self.get("purchase_receipts"):
         if pr.receipt_document_type and pr.receipt_document:
@@ -45,5 +44,102 @@ def get_items_from_purchase_receipts_new(self):
                 item.purchase_receipt_item = d.name
                 item.is_fixed_asset = d.is_fixed_asset
 
+@frappe.whitelist()
+def delete_account_closing_balance_docs():
+    account_closing_balance_docs = frappe.get_all('Account Closing Balance', fields=['name'])
+    
+    for doc in account_closing_balance_docs:
+        try:
+            frappe.delete_doc('Account Closing Balance', doc['name'], force=1)
+            frappe.db.commit()
+            print(f"Deleted: {doc['name']}")
+        except Exception as e:
+            print(f"Failed to delete {doc['name']}: {e}")
+
+import frappe
+from frappe.utils import getdate
+from erpnext.accounts.doctype.period_closing_voucher.period_closing_voucher import PeriodClosingVoucher
 
 
+@frappe.whitelist()
+def cancel_period_closing_vouchers():
+    period_year = 2025
+
+    vouchers = frappe.get_all(
+        "Period Closing Voucher",
+        filters={"fiscal_year": ["like", f"{period_year}%"]}, 
+        fields=["name"]
+    )
+    
+    for voucher in vouchers:
+        doc = frappe.get_doc("Period Closing Voucher", voucher.name)
+        if doc.docstatus == 1:
+            doc.cancel() 
+        else:
+            frappe.msgprint(f"Voucher {voucher.name} is already canceled.")
+    
+    frappe.db.commit()
+    return f"Canceled {len(vouchers)} Period Closing Vouchers for {period_year}."
+
+
+@frappe.whitelist()
+def get_party_account(party_type, party=None, company=None, include_advance=False):
+    """Returns the account for the given `party`.
+    Will first search in party (Customer / Supplier / Investor) record, if not found,
+    will search in group (Customer Group / Supplier Group / Investor Group),
+    finally will return default."""
+    
+    if not company:
+        frappe.throw(_("Please select a Company"))
+
+    if not party and party_type in ["Customer", "Supplier", "Investor"]:
+        default_account_name = {
+            "Customer": "default_receivable_account",
+            "Supplier": "default_payable_account",
+            "Investor": "default_investor_account", 
+        }.get(party_type)
+
+        return frappe.get_cached_value("Company", company, default_account_name)
+
+    account = frappe.db.get_value(
+        "Party Account", {"parenttype": party_type, "parent": party, "company": company}, "account"
+    )
+
+    if not account and party_type in ["Customer", "Supplier", "Investor"]:
+        party_group_doctype = {
+            "Customer": "Customer Group",
+            "Supplier": "Supplier Group",
+            "Investor": "Investor Group",
+        }.get(party_type)
+
+        group = frappe.get_cached_value(party_type, party, scrub(party_group_doctype))
+        account = frappe.db.get_value(
+            "Party Account",
+            {"parenttype": party_group_doctype, "parent": group, "company": company},
+            "account",
+        )
+
+    if not account and party_type in ["Customer", "Supplier", "Investor"]:
+        default_account_name = {
+            "Customer": "default_receivable_account",
+            "Supplier": "default_payable_account",
+            "Investor": "default_investor_account", 
+        }.get(party_type)
+
+        account = frappe.get_cached_value("Company", company, default_account_name)
+
+    existing_gle_currency = get_party_gle_currency(party_type, party, company)
+    if existing_gle_currency:
+        if account:
+            account_currency = frappe.get_cached_value("Account", account, "account_currency")
+        if (account and account_currency != existing_gle_currency) or not account:
+            account = get_party_gle_account(party_type, party, company)
+
+    if include_advance and party_type in ["Customer", "Supplier", "Investor"]:
+        advance_account = get_party_advance_account(party_type, party, company)
+        if advance_account:
+            return [account, advance_account]
+        else:
+            return [account]
+
+    return account

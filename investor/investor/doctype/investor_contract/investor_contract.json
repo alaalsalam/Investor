@@ -13,6 +13,7 @@
   "investment_amount",
   "investment_amount_in_words",
   "currency",
+  "investor_account",
   "column_break_fs5sz",
   "party_type",
   "posting_date",
@@ -28,9 +29,18 @@
   "cb_party",
   "investment_percent",
   "investment_profit",
+  "net_profit",
   "investment_profit_per",
   "profit_and_loss_account_to_project",
   "is_signed",
+  "section_break_yafz",
+  "project_cost",
+  "funding_available",
+  "available_for_other_deals",
+  "column_break_ymve",
+  "total_cost_of_items_sold",
+  "used_in_same_deal",
+  "used_for_other_deals",
   "sb_terms",
   "start_date",
   "cb_date",
@@ -104,7 +114,7 @@
    "in_standard_filter": 1,
    "label": "Status",
    "no_copy": 1,
-   "options": "Unsigned\nActive\nInactive"
+   "options": "\nUnsigned\nComplete\nActive\nInActive\nPartially Fulfilled\nFulfilled"
   },
   {
    "allow_on_submit": 1,
@@ -305,9 +315,10 @@
    "fieldname": "contract_type",
    "fieldtype": "Select",
    "label": "Contract Type",
-   "options": "Specific\nUnSpecific"
+   "options": "Open\nClosed\nSub Contract\nSpecific\nUnSpecific"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "project",
    "fieldtype": "Link",
    "label": "Project",
@@ -323,9 +334,11 @@
    "fieldname": "investment_amount",
    "fieldtype": "Currency",
    "label": " Investment Amount",
-   "options": "currency"
+   "options": "currency",
+   "reqd": 1
   },
   {
+   "allow_on_submit": 1,
    "fetch_from": "project.project_name",
    "fieldname": "project_name",
    "fieldtype": "Data",
@@ -353,6 +366,7 @@
    "label": "Project Profit %"
   },
   {
+   "allow_on_submit": 1,
    "fetch_from": "project.custom_profit_and_loss_account_to_project",
    "fieldname": "profit_and_loss_account_to_project",
    "fieldtype": "Link",
@@ -388,12 +402,75 @@
   {
    "fieldname": "posting_date",
    "fieldtype": "Date",
-   "label": "Posting Date"
+   "label": "Posting Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "investor_account",
+   "fieldtype": "Link",
+   "label": "Investor Account",
+   "options": "Account"
+  },
+  {
+   "allow_on_submit": 1,
+   "description": "(\u0625\u062c\u0645\u0627\u0644\u064a \u0627\u0644\u0645\u062a\u0627\u062d \u0644\u0646\u0641\u0633 \u0627\u0644\u0635\u0641\u0642\u0629)",
+   "fieldname": "funding_available",
+   "fieldtype": "Currency",
+   "label": "Funding Available "
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "net_profit",
+   "fieldtype": "Currency",
+   "label": "Net Profit"
+  },
+  {
+   "fieldname": "section_break_yafz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "description": "(\u0625\u062c\u0645\u0627\u0644\u064a \u062a\u0643\u0627\u0644\u064a\u0641 \u0627\u0644\u0635\u0641\u0642\u0629)\n\n",
+   "fieldname": "project_cost",
+   "fieldtype": "Currency",
+   "label": "Project Cost"
+  },
+  {
+   "allow_on_submit": 1,
+   "description": "(\u0627\u0644\u0645\u062a\u0627\u062d \u0644\u0635\u0641\u0642\u0627\u062a \u0623\u062e\u0631\u0649)",
+   "fieldname": "available_for_other_deals",
+   "fieldtype": "Currency",
+   "label": " Available For Other Deals"
+  },
+  {
+   "fieldname": "column_break_ymve",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "description": "\u0627\u062c\u0645\u0627\u0644\u064a \u0627\u0644\u062a\u0643\u0644\u0641\u0629 \u0627\u0644\u0641\u0639\u0644\u064a\u0629 \u0644\u0644\u0641\u0648\u0627\u062a\u064a\u0631 \u0627\u0644\u0645\u0628\u0627\u0639\u0629",
+   "fieldname": "total_cost_of_items_sold",
+   "fieldtype": "Currency",
+   "label": "Total Cost Of Items Sold"
+  },
+  {
+   "allow_on_submit": 1,
+   "description": "(\u0627\u0644\u0645\u0628\u0644\u063a \u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645 \u0641\u064a \u0646\u0641\u0633 \u0627\u0644\u0635\u0641\u0642\u0629)",
+   "fieldname": "used_in_same_deal",
+   "fieldtype": "Currency",
+   "label": "Used In Same Deal"
+  },
+  {
+   "allow_on_submit": 1,
+   "description": "(\u0627\u0644\u0645\u0628\u0644\u063a \u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645 \u0641\u064a \u0635\u0641\u0642\u0627\u062a \u0623\u062e\u0631\u0649)",
+   "fieldname": "used_for_other_deals",
+   "fieldtype": "Currency",
+   "label": "Used For Other Deals"
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2023-12-23 23:56:35.067458",
+ "modified": "2025-02-26 00:18:04.471883",
  "modified_by": "Administrator",
  "module": "Investor",
  "name": "investor Contract",
@@ -463,7 +540,32 @@
  "show_name_in_global_search": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": [],
+ "states": [
+  {
+   "color": "Cyan",
+   "title": "Signed"
+  },
+  {
+   "color": "Orange",
+   "title": "Active"
+  },
+  {
+   "color": "Pink",
+   "title": "InActive"
+  },
+  {
+   "color": "Yellow",
+   "title": "Fulfilled"
+  },
+  {
+   "color": "Green",
+   "title": "Complete"
+  },
+  {
+   "color": "Purple",
+   "title": "Partially Fulfilled"
+  }
+ ],
  "track_changes": 1,
  "track_seen": 1
 }

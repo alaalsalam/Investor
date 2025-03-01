@@ -10,9 +10,10 @@
   "supplier_and_price_defaults_section",
   "section_break_in6he",
   "investor_master_name",
-  "supplier_group",
+  "investor_group",
   "default_currency",
   "column_break_4",
+  "investor_account",
   "section_break_ep2nw",
   "default_profit_and_loss_account_to_project",
   "default_profit_and_loss_account_to_contract",
@@ -21,6 +22,7 @@
   "default_income_account",
   "cost_center",
   "company",
+  "company_account",
   "transaction_settings_section",
   "maintain_same_rate_action",
   "role_to_override_stop_action",
@@ -43,12 +45,6 @@
    "fieldname": "supplier_and_price_defaults_section",
    "fieldtype": "Tab Break",
    "label": "Naming Series and Price Defaults"
-  },
-  {
-   "fieldname": "supplier_group",
-   "fieldtype": "Link",
-   "label": "Default Investor Group",
-   "options": "Investor Group"
   },
   {
    "fieldname": "column_break_4",
@@ -218,13 +214,31 @@
    "fieldtype": "Link",
    "label": "Company",
    "options": "Company"
+  },
+  {
+   "fieldname": "company_account",
+   "fieldtype": "Link",
+   "label": "Company Account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "investor_account",
+   "fieldtype": "Link",
+   "label": "Investor Account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "investor_group",
+   "fieldtype": "Link",
+   "label": "Default Investor Group",
+   "options": "Investor Group"
   }
  ],
  "icon": "fa fa-cog",
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-12-19 22:39:55.845983",
+ "modified": "2025-02-24 23:49:18.390378",
  "modified_by": "Administrator",
  "module": "Investor",
  "name": "Investor Settings",

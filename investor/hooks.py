@@ -33,7 +33,11 @@ doctype_js = {
     "Landed Cost Voucher" : "public/js/landed_cost_voucher.js",
     "Project" : "public/js/project.js"
     }
-
+override_doctype_class = {
+    "Period Closing Voucher": "investor.overrides.period_closing_voucher.PeriodClosingVoucherCustom",
+    "Project": "investor.overrides.project.ProjectCustom",
+     "Landed Cost Voucher":"investor.overrides.landed_cost_voucher.LandedCostVoucherCustom"
+}
 # doctype_js = {"doctype" : "public/js/doctype.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
@@ -103,12 +107,12 @@ after_install = "investor.install.after_install"
 #	"ToDo": "custom_app.overrides.CustomToDo"
 # }
 
-override_doctype_class = {
-	# "Landed Cost Voucher": "investor.overrides.landed_cost_voucher.LandedCostVoucherCustom",
-	"Period Closing Voucher": "investor.overrides.period_closing_voucher.PeriodClosingVoucherCustom",
-	# "Project": "investor.overrides.project.ProjectCustom"
-	# "Journal Entry": "investor.overrides.journal_entry.JournalEntryCustom"
-}
+# override_doctype_class = {
+# 	# "Landed Cost Voucher": "investor.overrides.landed_cost_voucher.LandedCostVoucherCustom",
+# 	"Period Closing Voucher": "investor.overrides.period_closing_voucher.PeriodClosingVoucherCustom",
+# 	# "Project": "investor.overrides.project.ProjectCustom"
+# 	# "Journal Entry": "investor.overrides.journal_entry.JournalEntryCustom"
+# }
 accounting_dimension_doctypes = [
  	"Period Closing Voucher",
   	"Investor",
@@ -116,6 +120,9 @@ accounting_dimension_doctypes = [
 # Document Events3ثق45ف6غ7ع
 # ---------------
 # Hook on document methods and events
+override_whitelisted_methods = {
+    "erpnext.accounts.party.get_party_account": "investor.utils.get_party_account"
+}
 
 doc_events = {
     "Landed Cost Voucher": {
@@ -128,6 +135,33 @@ doc_events = {
         "validate": "investor.utils.update_dividend_project_investor",
     
     },
+    "Project": {
+        "onload": "investor.utils.update_dividend_project_investor",
+    
+    },
+
+    "Purchase Invoice": {
+        "on_submit": "investor.utils.on_submit_parchase_invoice",
+    },
+    "Sales Invoice": {
+        "on_submit": "investor.utils.update_project_received_totals",
+    },
+     "Journal Entry": {
+        "on_submit": "investor.utils.update_project_received_totals"
+    },
+    "Payment Entry": {
+        "on_submit": "investor.utils.on_submit_payment_entry",
+    },
+    "Payment Entry": {
+        "before_submit": "investor.utils.update_project_payment_totals",
+    },
+    
+    "Period Closing Voucher": {
+        "on_submit": "investor.utils.process_project_closure1"
+    }
+
+
+
     #  "Journal Entry": {
     #      "validate": "investor.overrides.journal_entry.set_post_data",
     

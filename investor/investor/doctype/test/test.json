@@ -1,0 +1,74 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-01-18 02:28:47.256980",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "contract_dividend_ratios",
+  "test2",
+  "show",
+  "cost_table",
+  "custom_create",
+  "as"
+ ],
+ "fields": [
+  {
+   "fieldname": "test2",
+   "fieldtype": "Float",
+   "label": "test2"
+  },
+  {
+   "fieldname": "contract_dividend_ratios",
+   "fieldtype": "Table",
+   "label": "Contract Dividend Ratios",
+   "options": "Contract Dividend Ratios"
+  },
+  {
+   "fieldname": "show",
+   "fieldtype": "Button",
+   "label": "Show"
+  },
+  {
+   "fieldname": "cost_table",
+   "fieldtype": "Table",
+   "label": "Cost Table",
+   "options": "Cost Table"
+  },
+  {
+   "fieldname": "custom_create",
+   "fieldtype": "HTML",
+   "label": "Create"
+  },
+  {
+   "fieldname": "as",
+   "fieldtype": "Link",
+   "label": "as",
+   "options": "Purchase Invoice"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-02-11 14:08:57.190201",
+ "modified_by": "Administrator",
+ "module": "Investor",
+ "name": "test",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

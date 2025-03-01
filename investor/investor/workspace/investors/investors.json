@@ -1,6 +1,15 @@
 {
- "charts": [],
- "content": "[{\"id\":\"pi98JLeszw\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Investors</span>\",\"col\":12}},{\"id\":\"yatbfsOLfW\",\"type\":\"card\",\"data\":{\"card_name\":\"Investor\",\"col\":4}},{\"id\":\"bqNMQ1L_zv\",\"type\":\"card\",\"data\":{\"card_name\":\"Transferors\",\"col\":4}},{\"id\":\"lrjhZtqd34\",\"type\":\"card\",\"data\":{\"card_name\":\"Project\",\"col\":4}}]",
+ "charts": [
+  {
+   "chart_name": "Project",
+   "label": "Project"
+  },
+  {
+   "chart_name": "Project 2",
+   "label": "project"
+  }
+ ],
+ "content": "[{\"id\":\"pi98JLeszw\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\" style=\\\"\\\">Investors</span>\",\"col\":12}},{\"id\":\"HtLoEgvuE3\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Project\",\"col\":12}},{\"id\":\"mK6H6ym2q1\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Active Contract\",\"col\":4}},{\"id\":\"6CDX7O4pEN\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Completed Contract\",\"col\":4}},{\"id\":\"EGBnacztvn\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Completed Project\",\"col\":4}},{\"id\":\"9mqoDBUbLR\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Investor Contract\",\"col\":4}},{\"id\":\"63H-JFyfdc\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"In Progress Project\",\"col\":4}},{\"id\":\"yzBzFSRPXw\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Open Project\",\"col\":4}},{\"id\":\"z5h3yFrrpQ\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"yatbfsOLfW\",\"type\":\"card\",\"data\":{\"card_name\":\"Investor\",\"col\":4}},{\"id\":\"bqNMQ1L_zv\",\"type\":\"card\",\"data\":{\"card_name\":\"Transferors\",\"col\":4}},{\"id\":\"lrjhZtqd34\",\"type\":\"card\",\"data\":{\"card_name\":\"Project\",\"col\":4}},{\"id\":\"2KXOiUctDU\",\"type\":\"card\",\"data\":{\"card_name\":\"Period Closing Voucher\",\"col\":4}},{\"id\":\"r3EzhaabMH\",\"type\":\"card\",\"data\":{\"card_name\":\"Landed Cost Voucher\",\"col\":4}},{\"id\":\"6Jbb3CYtQw\",\"type\":\"card\",\"data\":{\"card_name\":\"Purchase\",\"col\":4}},{\"id\":\"FVvCHlI2rZ\",\"type\":\"card\",\"data\":{\"card_name\":\"Sales\",\"col\":4}},{\"id\":\"bt8X4k6HIb\",\"type\":\"card\",\"data\":{\"card_name\":\"Payment Entry\",\"col\":4}},{\"id\":\"IS8a-DCehV\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Investor Dashbard\",\"col\":3}},{\"id\":\"X_18wiRHCc\",\"type\":\"chart\",\"data\":{\"chart_name\":\"project\",\"col\":12}}]",
  "creation": "2023-03-14 22:07:42.720518",
  "custom_blocks": [],
  "docstatus": 0,
@@ -105,19 +114,167 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Period Closing Voucher",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Period Closing Voucher",
+   "link_count": 0,
+   "link_to": "Period Closing Voucher",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purchase",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purchase Invoice",
+   "link_count": 0,
+   "link_to": "Purchase Invoice",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sales",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sales Invoice",
+   "link_count": 0,
+   "link_to": "Sales Invoice",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Payment Entry",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Payment Entry",
+   "link_count": 0,
+   "link_to": "Payment Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Landed Cost Voucher",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Landed Cost Voucher",
+   "link_count": 0,
+   "link_to": "Landed Cost Voucher",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Landed Cost Voucher Setting",
+   "link_count": 0,
+   "link_to": "Landed Cost Voucher setting",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Landed Cost Voucher Report",
+   "link_count": 0,
+   "link_to": "Landed Cost Voucher Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2023-12-12 04:43:42.862474",
- "modified_by": "alaalsalam101@gmail.com",
+ "modified": "2025-02-26 16:11:16.040974",
+ "modified_by": "Administrator",
  "module": "Investor",
  "name": "Investors",
- "number_cards": [],
+ "number_cards": [
+  {
+   "label": "Active Contract",
+   "number_card_name": "Active Contract"
+  },
+  {
+   "label": "Completed Contract",
+   "number_card_name": "Completed Contract"
+  },
+  {
+   "label": "Investor Contract",
+   "number_card_name": "Investor Contract"
+  },
+  {
+   "label": "Completed Project",
+   "number_card_name": "Completed Project"
+  },
+  {
+   "label": "In Progress Project",
+   "number_card_name": "In Progress Project"
+  },
+  {
+   "label": "Open Project",
+   "number_card_name": "Open Project"
+  }
+ ],
  "owner": "Administrator",
  "parent_page": "",
  "public": 1,
  "quick_lists": [],
  "roles": [],
  "sequence_id": 2.0,
- "shortcuts": [],
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Investor Dashbard",
+   "link_to": "Investor Dashbard",
+   "type": "Dashboard"
+  }
+ ],
  "title": "Investors"
 }

@@ -3,6 +3,7 @@
 
 import frappe
 import erpnext
+import re
 
 from frappe import _
 from erpnext.controllers.accounts_controller import AccountsController
@@ -30,6 +31,30 @@ class investorContract(AccountsController):
 			name = "{} - {}".format(name, count)
 
 		self.name = _(name)
+	
+
+	@frappe.whitelist()
+	def get_contract_template_data(template_name):
+		template_doc = frappe.get_doc('Contract Template')
+		frappe.msgprint(f"Contract Terms: {template_name}")
+
+		contract_terms = template_doc.contract_terms
+
+		percentages = re.findall(r'(\d+)%', contract_terms)
+
+		dividend_ratios = []
+		for percentage in percentages:
+			dividend_ratios.append({"dividend": int(percentage)})
+
+		# طباعة القيم في السجل
+		frappe.msgprint(f"Contract Terms: {contract_terms}")
+		frappe.msgprint(f"Extracted Percentages: {percentages}")
+		frappe.msgprint(f"Dividend Ratios: {dividend_ratios}")
+
+		return {
+			"contract_terms": contract_terms,  # إضافة هذا الحقل
+			"dividend_ratios": dividend_ratios
+		}
 
 	# def on_cancel(self):
 	# 	self.ignore_linked_doctypes = ("GL Entry")
@@ -56,18 +81,18 @@ class investorContract(AccountsController):
 		# 		balanc = balanc * -1
 		# 	self.project_profit = balanc			
 		
-	def validate(self):
+	# def validate(self):
 		
-		self.validate_dates()
-		self.update_contract_status()
-		self.update_fulfilment_status()
+	# 	self.validate_dates()
+	# 	# self.update_contract_status()
+	# 	# self.update_fulfilment_status()
 
 	def before_submit(self):
 		self.signed_by_company = frappe.session.user
 
-	def before_update_after_submit(self):
-		self.update_contract_status()
-		self.update_fulfilment_status()
+	# def before_update_after_submit(self):
+	# 	self.update_contract_status()
+	# 	self.update_fulfilment_status()
 
 	def validate_dates(self):
 		if self.end_date and self.end_date < self.start_date:
@@ -121,7 +146,17 @@ class investorContract(AccountsController):
 	def validate(self):
      
 		self.calculate_total_delate()
+		if self.contract_type != "Sub Contract":
+			self.validate_dividend_in_contract_dividend_ratios()
+		self.validate_dates()
 		# self.set_missing_accounts_and_fields()
+	
+	def validate_dividend_in_contract_dividend_ratios(self)	:
+
+		total_dividend = sum([child.dividend for child in self.get("contract_dividend_ratios")])
+		if total_dividend != 100:
+			frappe.throw("The total dividend percentages must equal 100%. Please correct the values.")
+	
 
 	def set_missing_accounts_and_fields(self):
 		if not self.company:
@@ -147,16 +182,44 @@ class investorContract(AccountsController):
 		"""Calculates total amount."""
 		self.investment_amount_in_words = money_in_words(self.investment_amount)
 
-	def on_submit(self):
-		self.make_gl_entries()
+	# def on_submit(self):
+	# 	self.make_gl_entries()
+	# 	# pass
+	# def on_change(self):
+	# 	self.make_gl_entries()
+	# # 	# pass
 
 
 	def on_cancel(self):
 		self.ignore_linked_doctypes = ("GL Entry", "Payment Ledger Entry")
 		make_reverse_gl_entries(voucher_type=self.doctype, voucher_no=self.name)
+	
 		# frappe.db.set(self, 'status', 'Cancelled')
+		
+	def make_gl_entries(self, cancel=False, from_repost=False):
+		
+		gl_entries = self.get_gl_entries()
 
-	def make_gl_entries(self):
+		if gl_entries:
+			make_gl_entries(
+				gl_entries,
+				cancel=cancel,
+				update_outstanding="No",
+				merge_entries=False,
+				from_repost=from_repost
+			)
+
+	def get_gl_entries(self):
+		gl_entries = []
+		self.make_gl_entries1(gl_entries)
+		
+		return gl_entries
+
+
+	def make_gl_entries1(self, gl_entries):
+		investor_settings = frappe.get_single("Investor Settings")  
+		cost_center = investor_settings.cost_center 
+
 		if not self.investment_profit:
 			return
 
@@ -173,7 +236,8 @@ class investorContract(AccountsController):
 					"against_voucher_type": self.doctype,
 					"against_voucher": self.name,
 					"project": self.project,
-					"posting_date":self.end_date,
+					"cost_center":cost_center,
+					"posting_date":self.posting_date,
 					"remarks": "اغلاق المشاريع"
 				},
 				item=self,
@@ -194,8 +258,9 @@ class investorContract(AccountsController):
 						"project": self.project,
 						"remarks": "توزيع ارباح الصفقة",
 						"against_voucher": self.name,
-						"posting_date":self.end_date,
-						"against_voucher_type": self.doctype
+						"posting_date":self.posting_date,
+						"against_voucher_type": self.doctype,
+						"cost_center":cost_center,
 					},
 					item=divided,
 				)

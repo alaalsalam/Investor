@@ -5,6 +5,20 @@
 frappe.query_reports["Landed Cost Voucher Report"] = {
 	"filters": [
 		{
+            "fieldname": "group_by_item_code",
+            "label": __("Group by Item Code"),
+            "fieldtype": "Check",
+            "default": 1,
+            "reqd": 0
+        },
+		{
+            "fieldname": "show_description",
+            "label": __("Show Description"),
+            "fieldtype": "Check",
+            "default": 0
+        },
+      
+		{
 			"fieldname": "from_date",
 			"label": __("From Date"),
 			"fieldtype": "Date",
@@ -18,57 +32,57 @@ frappe.query_reports["Landed Cost Voucher Report"] = {
 			"default": frappe.datetime.get_today(),
 			"reqd": 1
 		},
-		{
-			"fieldname": "docstatus",
-			"label": __("docstatus"),
-			"fieldtype": "Select",
-			"options": "\n0\n1\n2",
-			"default": "Submitted"
-		},
+		// {
+		// 	"fieldname": "docstatus",
+		// 	"label": __("docstatus"),
+		// 	"fieldtype": "Select",
+		// 	"options": "\n0\n1\n2",
+		// 	"default": "Submitted"
+		// },
 		{
 			"fieldname": "item_code",
 			"label": __("Item Code"),
 			"fieldtype": "Link",
 			"options": "Item"
 		},
-		{
-			"fieldname": "project",
-			"label": __("Project"),
-			"fieldtype": "Link",
-			"options": "Project"
-		},
-		{
-			"fieldname": "custom_item_code",
-			"label": __("Custom Item Code"),
-			"fieldtype": "Data"
-		},
-		{
-			"fieldname": "amount",
-			"label": __("Amount"),
-			"fieldtype": "Currency"
-		},
-		{
-			"fieldname": "account_currency",
-			"label": __("Account Currency"),
-			"fieldtype": "Link",
-			"options": "Currency"
-		},
-		{
-			"fieldname": "description",
-			"label": __("Description"),
-			"fieldtype": "Data"
-		},
-		{
-			"fieldname": "custom_purchase_invoice",
-			"label": __("Custom Purchase Invoice"),
-			"fieldtype": "Link",
-			"options": "Purchase Invoice"
-		},
-		{
-			"fieldname": "expense_account",
-			"label": __("Expense Account"),
-			"fieldtype": "Link",
-			"options": "Account"
-		}
+		// {
+		// 	"fieldname": "project",
+		// 	"label": __("Project"),
+		// 	"fieldtype": "Link",
+		// 	"options": "Project"
+		// },
+		// {
+		// 	"fieldname": "custom_item_code",
+		// 	"label": __("Custom Item Code"),
+		// 	"fieldtype": "Data"
+		// },
+		// {
+		// 	"fieldname": "amount",
+		// 	"label": __("Amount"),
+		// 	"fieldtype": "Currency"
+		// },
+		// {
+		// 	"fieldname": "account_currency",
+		// 	"label": __("Account Currency"),
+		// 	"fieldtype": "Link",
+		// 	"options": "Currency"
+		// },
+		// {
+		// 	"fieldname": "description",
+		// 	"label": __("Description"),
+		// 	"fieldtype": "Data"
+		// },
+		// {
+		// 	"fieldname": "custom_purchase_invoice",
+		// 	"label": __("Custom Purchase Invoice"),
+		// 	"fieldtype": "Link",
+		// 	"options": "Purchase Invoice"
+		// },
+		// {
+		// 	"fieldname": "expense_account",
+		// 	"label": __("Expense Account"),
+		// 	"fieldtype": "Link",
+		// 	"options": "Account"
+		// }
 	]
 };

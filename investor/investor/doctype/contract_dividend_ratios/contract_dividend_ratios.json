@@ -9,6 +9,8 @@
   "dividend_holder",
   "party_type",
   "party_name",
+  "show",
+  "cost_id",
   "cb_notes",
   "dividend",
   "profit_amount",
@@ -68,9 +70,11 @@
   {
    "fieldname": "dividend_holder",
    "fieldtype": "Data",
+   "hidden": 1,
    "in_list_view": 1,
    "in_preview": 1,
-   "label": "Dividend Holder"
+   "label": "Dividend Holder",
+   "read_only": 1
   },
   {
    "allow_on_submit": 1,
@@ -87,12 +91,22 @@
    "options": "Contract Dividend Ratios",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "show",
+   "fieldtype": "Button",
+   "label": "show"
+  },
+  {
+   "fieldname": "cost_id",
+   "fieldtype": "Data",
+   "label": "Cost Id"
   }
  ],
  "is_submittable": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-12-23 18:31:25.504096",
+ "modified": "2025-02-25 23:48:11.719046",
  "modified_by": "Administrator",
  "module": "Investor",
  "name": "Contract Dividend Ratios",

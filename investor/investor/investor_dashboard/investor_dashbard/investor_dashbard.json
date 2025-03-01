@@ -1,0 +1,47 @@
+{
+ "cards": [
+  {
+   "card": "Investor Contract"
+  },
+  {
+   "card": "Active Contract"
+  },
+  {
+   "card": "Completed Contract"
+  },
+  {
+   "card": "Open Project"
+  },
+  {
+   "card": "In Progress Project"
+  },
+  {
+   "card": "Completed Project"
+  },
+  {
+   "card": "Cancelled Project"
+  }
+ ],
+ "charts": [
+  {
+   "chart": "Project",
+   "width": "Full"
+  },
+  {
+   "chart": "Project",
+   "width": "Half"
+  }
+ ],
+ "creation": "2025-02-02 12:34:09.572881",
+ "dashboard_name": "Investor Dashbard",
+ "docstatus": 0,
+ "doctype": "Dashboard",
+ "idx": 0,
+ "is_default": 0,
+ "is_standard": 1,
+ "modified": "2025-02-25 22:58:32.154374",
+ "modified_by": "Administrator",
+ "module": "Investor",
+ "name": "Investor Dashbard",
+ "owner": "Administrator"
+}

@@ -2,9 +2,26 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Landed Cost Voucher', {
+    refresh: function (frm){
+		 frm.events.show_general_ledger(frm);
+    },
+    show_general_ledger: function(frm) {
+		// if(frm.doc.docstatus == 1 || 1) {
+			frm.add_custom_button(__('Ledger'), function() {
+				frappe.route_options = {
+					"voucher_no": frm.doc.name,
+					"from_date": frm.doc.start_date,
+					"to_date": moment(frm.doc.modified).format('YYYY-MM-DD'),
+					"company": frm.doc.company,
+					"group_by": "",
+					"show_cancelled_entries": frm.doc.docstatus === 2
+				};
+				frappe.set_route("query-report", "General Ledger");
+			}, "fa fa-table");
+		// }
+	},
 
     custom_mode_of_payment(frm){
-     // console.log(frm.doc);
         if (frm.doc.custom_mode_of_payment) {            
             frappe.call({
                 method: "investor.investor.doctype.expense_entry.expense_entry.get_payment_account",
@@ -161,3 +178,24 @@ frappe.ui.form.on('Landed Cost Voucher', {
          
      },
  });
+ frappe.ui.form.on("Landed Cost Taxes and Charges", {
+    custom_item_code: function(frm, cdt, cdn) {
+            let row = locals[cdt][cdn];
+            
+            if (row.custom_item_code) {
+                frappe.call({
+                    method: "investor.utils.get_item_expense_account",
+                    args: {
+                        item_code: row.custom_item_code,
+                        company: frm.doc.company
+                    },
+                    callback: function(r) {
+                        if (r.message) {
+                            frappe.model.set_value(cdt, cdn, "expense_account", r.message.expense_account);
+                        }
+                    }
+                });
+            }
+        }
+    });
+    

@@ -676,8 +676,8 @@
    "type": "Link"
   }
  ],
- "modified": "2023-12-12 04:43:43.232394",
- "modified_by": "alaalsalam101@gmail.com",
+ "modified": "2025-01-18 17:56:56.606905",
+ "modified_by": "Administrator",
  "module": "Investor",
  "name": "Accounting - Najem",
  "number_cards": [],
@@ -687,7 +687,7 @@
  "quick_lists": [],
  "restrict_to_domain": "",
  "roles": [],
- "sequence_id": 3.0,
+ "sequence_id": 9.0,
  "shortcuts": [
   {
    "doc_view": "",
