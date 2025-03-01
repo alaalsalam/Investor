@@ -10,7 +10,6 @@ from frappe.query_builder.custom import ConstantColumn
 
 from frappe import _
 from erpnext.controllers.accounts_controller import AccountsController
-# from frappe.model.document import Document
 from frappe.utils import getdate, nowdate
 from frappe.utils import money_in_words
 from erpnext.accounts.doctype.payment_request.payment_request import \
