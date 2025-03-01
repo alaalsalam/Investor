@@ -1,4 +1,4 @@
-
+# from frappe.model.document import Document
 import frappe
 import erpnext
 from frappe import _
