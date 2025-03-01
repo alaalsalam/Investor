@@ -225,7 +225,7 @@ class investorContract(AccountsController):
 
 		gl_entries = []
 
-		# GL entry for profit and loss account associated with the project
+		# GL entry for profit and loss account associated with the projects
 		gl_entries.append(
 			self.get_gl_dict(
 				{
