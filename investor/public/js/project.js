@@ -1,6 +1,5 @@
 // Copyright (c) 2023, ziad and contributors
 // For license information, please see license.txt
-// لاFor license information, please see license.txt
 
 frappe.ui.form.on('Project', {
     setup: function(frm) {
