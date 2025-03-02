@@ -36,7 +36,9 @@ doctype_js = {
 override_doctype_class = {
     "Period Closing Voucher": "investor.overrides.period_closing_voucher.PeriodClosingVoucherCustom",
     "Project": "investor.overrides.project.ProjectCustom",
-     "Landed Cost Voucher":"investor.overrides.landed_cost_voucher.LandedCostVoucherCustom"
+     "Landed Cost Voucher":"investor.overrides.landed_cost_voucher.LandedCostVoucherCustom",
+    "Purchase Invoice": "investor.overrides.purchase_invoice.CustomPurchaseInvoice"
+
 }
 # doctype_js = {"doctype" : "public/js/doctype.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
@@ -125,6 +127,10 @@ override_whitelisted_methods = {
 }
 
 doc_events = {
+    "GL Entry": {
+        "on_submit": "investor.utils.update_project_received_total",
+        
+    },
     "Landed Cost Voucher": {
         "on_submit": "investor.utils.create_purchase_invoice_from_landed_cost",
         # "validate": "investor.utils.update_item_account",
@@ -143,18 +149,18 @@ doc_events = {
     "Purchase Invoice": {
         "on_submit": "investor.utils.on_submit_parchase_invoice",
     },
-    "Sales Invoice": {
-        "on_submit": "investor.utils.update_project_received_totals",
-    },
-     "Journal Entry": {
-        "on_submit": "investor.utils.update_project_received_totals"
-    },
-    "Payment Entry": {
-        "on_submit": "investor.utils.on_submit_payment_entry",
-    },
-    # "Payment Entry": {
-    #     "before_submit": "investor.utils.update_project_payment_totals",
+    # "Sales Invoice": {
+    #     "on_submit": "investor.utils.update_project_received_totals",
     # },
+    #  "Journal Entry": {
+    #     "on_submit": "investor.utils.update_project_received_totals"
+    # },
+    # "Payment Entry": {
+    #     "on_submit": "investor.utils.on_submit_payment_entry",
+    # },
+    "Payment Entry": {
+        "before_submit": "investor.utils.validate_payment_entry",
+    },
     
     "Period Closing Voucher": {
         "on_submit": "investor.utils.process_project_closure1"

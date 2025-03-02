@@ -103,7 +103,7 @@ class ProjectCustom(Project):
 		total_purchase_cost = calculate_total_purchase_cost(self.name)
 		self.total_purchase_cost = total_purchase_cost and total_purchase_cost[0][0] or 0
 		self.custom_project_cost = total_purchase_cost and total_purchase_cost[0][0] or 0
-	
+		
 	def calculate_sales_data(self):
 
 		sales_invoices = frappe.get_all(

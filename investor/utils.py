@@ -114,6 +114,7 @@ def get_item_account(doc, method):
 
          
 def update_dividend_project_investor(doc, method):
+    frappe.msgprint("hs")
    
     doc.custom_total_due_to_suppliers = doc.custom_project_cost - doc.custom_total_paid_to_suppliers if doc.custom_project_cost else 0
     
@@ -424,7 +425,7 @@ def on_submit_payment_entry(payment_entry, method):
     update_project_received_totals(payment_entry, method)
 @frappe.whitelist()
 def on_submit_parchase_invoice(doc, method):
-    update_project_received_totals(doc, method)
+    # update_project_received_totals(doc, method)
     update_project_status_on_invoice_submission(doc, method)
 
 @frappe.whitelist()
@@ -530,6 +531,83 @@ def update_project_payment_totals(doc, method):
 
     frappe.db.commit()
    
+
+@frappe.whitelist()
+def update_project_received_total(doc, method):
+    if not doc.project:
+        return
+    
+    total_received = 0
+    total_paid_to_suppliers = 0
+
+    sales_invoices = frappe.get_all(
+        "Sales Invoice",
+        filters={"project": doc.project, "docstatus": 1}, 
+        fields=["name", "grand_total", "outstanding_amount"]
+    )
+
+    for invoice in sales_invoices:
+        paid_amount = invoice.grand_total - invoice.outstanding_amount
+        total_received += paid_amount
+
+    purchase_invoices = frappe.get_all(
+        "Purchase Invoice",
+        filters={"project": doc.project, "docstatus": 1}, 
+        fields=["name", "grand_total", "outstanding_amount"]
+    )
+
+    for invoice in purchase_invoices:
+        paid_amount = invoice.grand_total - invoice.outstanding_amount
+        total_paid_to_suppliers += paid_amount
+
+    project_doc = frappe.get_doc("Project", doc.project)
+    
+    project_doc.custom_total_paid_to_suppliers = total_paid_to_suppliers
+    
+    project_doc.custom_total_due_to_suppliers = (project_doc.custom_project_cost or 0) - total_paid_to_suppliers
+
+    project_doc.custom_total_received_in_deal = total_received  
+
+    update_dividend_project_investor(project_doc, "custom")
+
+    project_doc.db_update()
+    
+   
+
+    return {
+        "total_received": total_received,
+        "total_paid_to_suppliers": total_paid_to_suppliers,
+        "total_due_to_suppliers": project_doc.custom_total_due_to_suppliers
+    }
+
+
+@frappe.whitelist()
+def validate_payment_entry(doc, method):
+    if not doc.project:
+        return
+    if doc.payment_type != "Pay":
+        return
+
+    project_doc = frappe.get_doc("Project", doc.project)
+
+    project_funding = project_doc.custom_funding_amount_ or 0
+    available_amount = project_doc.custom_total_available_in_deal or 0
+    total_project_budget = project_funding + available_amount
+
+    total_paid_to_suppliers = project_doc.custom_total_paid_to_suppliers or 0
+
+    total_payment_amount = doc.base_paid_amount
+
+    total_after_payment = total_paid_to_suppliers + total_payment_amount
+    if total_after_payment > total_project_budget:
+        exceeded_amount = total_after_payment - total_project_budget
+        frappe.throw(
+            f"Payment for Project '{project_doc.name}' is not Allowed! The total payments ({total_after_payment}) exceed the project budget ({total_project_budget}) by {exceeded_amount}."
+        )
+
+    
+
+
 
 @frappe.whitelist()
 def update_project_received_totals(doc, method):
