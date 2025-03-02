@@ -152,9 +152,9 @@ doc_events = {
     "Payment Entry": {
         "on_submit": "investor.utils.on_submit_payment_entry",
     },
-    "Payment Entry": {
-        "before_submit": "investor.utils.update_project_payment_totals",
-    },
+    # "Payment Entry": {
+    #     "before_submit": "investor.utils.update_project_payment_totals",
+    # },
     
     "Period Closing Voucher": {
         "on_submit": "investor.utils.process_project_closure1"

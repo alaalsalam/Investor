@@ -420,7 +420,7 @@ def on_submit_payment_entry(payment_entry, method):
 
     update_project_payment_totals(payment_entry, method)
 
-    update_investor_contract_status(payment_entry, method)
+    # update_investor_contract_status(payment_entry, method)
     update_project_received_totals(payment_entry, method)
 @frappe.whitelist()
 def on_submit_parchase_invoice(doc, method):
@@ -525,8 +525,8 @@ def update_project_payment_totals(doc, method):
 
             frappe.db.set_value("Project", project, "custom_total_used_return_from_deal_cost", new_used_return)
             frappe.db.set_value("Project", project, "custom_total_available_in_deal", total_available_in_deal - payment_amount)
-        else:
-            frappe.throw(f"Payment of {payment_amount} is not allowed because it exceeds available Project ({project}) profits ({total_available_in_deal})!")
+    #     else:
+    #         frappe.throw(f"Payment of {payment_amount} is not allowed because it exceeds available Project ({project}) profits ({total_available_in_deal})!")
 
     frappe.db.commit()
    
@@ -539,8 +539,11 @@ def update_project_received_totals(doc, method):
         project = doc.project
         project_doc = frappe.get_doc("Project", project)  
         update_dividend_project_investor(project_doc, "custom")
+        frappe.msgprint(f"it is for pro {project}")
+
 
     else:
+        frappe.msgprint(f"it is for prfo {project}")
         if doc.doctype == "Journal Entry":
             related_sales_invoice = frappe.db.sql("""
                 SELECT reference_name
@@ -579,8 +582,10 @@ def update_project_received_totals(doc, method):
     """, (project,))[0][0] or 0
 
     total_received = total_received_pe + total_received_si + total_received_je
+    frappe.msgprint(f"it is {total_received} for pro {project}")
 
     frappe.db.set_value("Project", project, "custom_total_received_in_deal", total_received)
+    frappe.db.commit()
 
    
 
