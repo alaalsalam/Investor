@@ -604,8 +604,20 @@ def validate_payment_entry(doc, method):
         frappe.throw(
             f"Payment for Project '{project_doc.name}' is not Allowed! The total payments ({total_after_payment}) exceed the project budget ({total_project_budget}) by {exceeded_amount}."
         )
+    else:
+       if total_paid_to_suppliers < project_funding:
+        if total_after_payment > project_funding:
+            remaining_payment = total_after_payment - project_funding
+            remaining_available_amount = available_amount - remaining_payment
 
-    
+            if remaining_available_amount < 0:
+                remaining_available_amount = 0
+
+            project_doc.custom_total_used_return_from_deal_cost = remaining_available_amount
+            project_doc.db_update()
+        else:
+            project_doc.custom_total_used_return_from_deal_cost = available_amount
+            project_doc.db_update()
 
 
 
