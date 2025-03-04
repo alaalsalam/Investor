@@ -142,3 +142,57 @@ def get_party_account(party_type, party=None, company=None, include_advance=Fals
             return [account]
 
     return account
+
+from frappe.utils import today
+@frappe.whitelist()
+def create_sub_contracts(project_name, investment_amount):
+    investment_amount = float(investment_amount)
+    project = frappe.get_doc("Project", project_name)
+    available_funds = project.custom_total_available_for_funding_other_deals or 0
+
+    if investment_amount > available_funds:
+        frappe.throw(f"Investment amount {investment_amount} exceeds available funding {available_funds} for project {project_name}.")
+
+    contracts = frappe.get_all(
+        "Investment Contracts",
+        filters={"parent": project_name, "contract_type": "Open"},
+        fields=["investor_contract"]
+    )
+
+    if not contracts:
+        frappe.throw("No Open Investment Contracts found for the selected project.")
+
+    open_contracts_count = len(contracts)
+
+    divided_amount = investment_amount / open_contracts_count
+    created_contracts = []
+
+    
+    for contract in contracts:
+        investor_contract = frappe.get_doc("investor Contract", contract["investor_contract"])
+
+        sub_contract = frappe.get_doc({
+            "doctype": "investor Contract",
+            "party_name": investor_contract.party_name,
+            "investor_account": investor_contract.investor_account,
+            "contract_terms": investor_contract.name,
+            "contract_type": "Sub Contract",
+            "investment_amount": divided_amount,
+            "posting_date": today(),
+            "docstatus": 1  # Submitted
+        })
+
+        sub_contract.insert()
+        frappe.db.commit()
+        created_contracts.append({
+                "investor_contract": sub_contract.name,
+                "investor_name": investor_contract.party_name,
+                "investment_amount": divided_amount,
+                "contract_type": "Sub Contract"
+            })
+
+
+    project.custom_total_available_for_use_in_deal += investment_amount
+    project.custom_total_available_for_funding_other_deals -= investment_amount
+    project.db_update()
+    return created_contracts 

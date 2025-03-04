@@ -114,8 +114,6 @@ def get_item_account(doc, method):
 
          
 def update_dividend_project_investor(doc, method):
-    frappe.msgprint("hs")
-   
     doc.custom_total_due_to_suppliers = doc.custom_project_cost - doc.custom_total_paid_to_suppliers if doc.custom_project_cost else 0
     
     total_cost_of_items_sold = doc.custom_total_cost_of_items_sold or 0
@@ -125,12 +123,12 @@ def update_dividend_project_investor(doc, method):
 
     if doc.custom_total_received_in_deal != 0:
         doc.custom_total_available_in_deal = min(total_received_in_deal, total_due_to_suppliers)
-        doc.custom_total_available_for_funding_other_deals = total_received_in_deal - doc.custom_total_available_in_deal
+        doc.custom_total_available_for_funding_other_deals = (total_received_in_deal - doc.custom_total_available_in_deal)-doc.custom_total_available_for_use_in_deal or 0
     if doc.custom_investment_contracts:
         total_funding_amount = sum(contract.investment_amount for contract in doc.custom_investment_contracts)
         doc.custom_funding_amount_ = total_funding_amount
         doc.custom_financing_gap=total_funding_amount-doc.custom_project_cost
-
+    doc.db_update()
     # if doc.custom_profit_and_loss_account_to_project:
     #     balanc = get_account_balance(account = doc.profit_and_loss_account_to_project, project = doc.project)
     #     doc.project_profit = balanc
@@ -142,7 +140,7 @@ def update_dividend_project_investor(doc, method):
             contract.investment_percent = ( contract.investment_amount * 100) / doc.custom_project_cost
             contract.gross_margin = ( doc.custom_project_amount * contract.investment_percent) / 100
             contract.per_gross_margin = ( contract.gross_margin * 100) / contract.investment_amount
-            total_investment_percentage = sum(contract.investment_percent for contract in doc.custom_investment_contracts)
+            total_investment_percentage = sum(contract.investment_percent or 0 for contract in doc.custom_investment_contracts)
             if doc.custom_total_profit:
                 contract.net_profit = (contract.investment_percent / total_investment_percentage) * doc.custom_total_profit if doc.custom_total_profit else 0
 

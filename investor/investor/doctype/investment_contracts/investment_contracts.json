@@ -21,7 +21,8 @@
   "per_gross_margin",
   "amended_from",
   "available_in_same_deal",
-  "used_in_same_deal"
+  "used_in_same_deal",
+  "contract_type"
  ],
  "fields": [
   {
@@ -125,12 +126,18 @@
    "fieldname": "cost_of_items_sold",
    "fieldtype": "Currency",
    "label": "Cost Of Items Sold"
+  },
+  {
+   "fetch_from": "investor_contract.contract_type",
+   "fieldname": "contract_type",
+   "fieldtype": "Data",
+   "label": "Contract Type"
   }
  ],
  "is_submittable": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-02-24 12:05:49.813920",
+ "modified": "2025-03-04 03:04:42.196725",
  "modified_by": "Administrator",
  "module": "Investor",
  "name": "Investment Contracts",

@@ -22,109 +22,93 @@ frappe.ui.form.on('Project', {
 			}
 		});
 	},
-	refresh: function (frm) {
-		if (frm.doc.docstatus === 0) {
-			frm.add_custom_button(
-				__("Project"),
-				function () {
-					const dialog = new frappe.ui.form.MultiSelectDialog({
-						doctype: "Project",
-						target: frm,
-						setters: [
-							{
-								label: "Total Available for Funding Other Deals",
-								fieldname: "custom_total_available_for_funding_other_deals",
-								fieldtype: "Currency",
-							},
-							{
-								label: "Start Date",
-								fieldname: "custom_start_date",
-								fieldtype: "Date",
-							},
-						],
-						add_filters_group: 1,
-						get_query() {
-							return {
-								custom_total_available_for_funding_other_deals: frm.doc.custom_total_available_for_funding_other_deals || undefined,
-								custom_start_date: frm.doc.custom_start_date || undefined,
-							};
-						},
-						action(selections) {
-							if (selections.length > 0) {
-								let funding_dialog = new frappe.ui.Dialog({
-									title: __("Enter Investment Amounts"),
-									fields: selections.map(project_name => ({
-										label: __("Investment Amount for {0}", [project_name]),
-										fieldname: project_name,
-										fieldtype: "Currency",
-										reqd: 1
-									})),
-									primary_action_label: __("Confirm"),
-									primary_action(values) {
-										frappe.db.get_value('Investor Settings', null, ['investor_group', 'investor_account'])
-											.then(setting => {
-												const investor_group = setting.message.investor_group;
-												const investor_account = setting.message.investor_account;
-	
-												selections.forEach(project_name => {
-													const investment_amount = values[project_name] || 0;
-	
-													frappe.db.exists('Investor', project_name).then(exists => {
-														if (exists) {
-															frappe.show_alert({
-																message: __("Investor {0} already exists. Skipping creation.", [project_name]),
-																indicator: 'orange'
-															});
-	
-															createInvestorContract(project_name, investor_account, investment_amount, frm);
-														} else {
-															frappe.call({
-																method: "frappe.client.insert",
-																args: {
-																	doc: {
-																		doctype: "Investor",
-																		investor_name: project_name,
-																		investor_group: investor_group,
-																		status: "Active",
-																	}
-																},
-																callback: function (r) {
-																	if (r.message) {
-																		frappe.show_alert({
-																			message: __("Investor {0} created successfully.", [project_name]),
-																			indicator: 'green'
-																		});
-	
-																		createInvestorContract(project_name, investor_account, investment_amount, frm);
-																	}
-																}
-															});
-														}
-													});
-	
-												});
-	
-												funding_dialog.hide();
-											});
-									}
-								});
-	
-								funding_dialog.show();
-								dialog.dialog.hide();
-							} else {
-								frappe.msgprint(__('Please select at least one project.'));
-							}
-						}
-					});
-				}
-			);
-		}
-	}
-	
-	
-	
-	
- });
+    refresh: function (frm) {
+            if (frm.doc.docstatus === 0) {
+                frm.add_custom_button(
+                    __("Project"),
+                    function () {
+                        const dialog = new frappe.ui.form.MultiSelectDialog({
+                            doctype: "Project",
+                            target: frm,
+                            setters: [
+                                {
+                                    label: "Total Available for Funding Other Deals",
+                                    fieldname: "custom_total_available_for_funding_other_deals",
+                                    fieldtype: "Currency",
+                                },
+                                {
+                                    label: "Start Date",
+                                    fieldname: "custom_start_date",
+                                    fieldtype: "Date",
+                                },
+                            ],
+                            add_filters_group: 1,
+                            get_query() {
+                                return {
+                                    custom_total_available_for_funding_other_deals: frm.doc.custom_total_available_for_funding_other_deals || undefined,
+                                    custom_start_date: frm.doc.custom_start_date || undefined,
+                                };
+                            },
+                            action(selections) {
+                                if (selections.length > 0) {
+                                    let funding_dialog = new frappe.ui.Dialog({
+                                        title: __("Enter Investment Amounts"),
+                                        fields: selections.map(project_name => ({
+                                            label: __("Investment Amount for {0}", [project_name]),
+                                            fieldname: project_name,
+                                            fieldtype: "Currency",
+                                            reqd: 1
+                                        })),
+                                        primary_action_label: __("Confirm"),
+                                        primary_action(values) {
+                                            selections.forEach(project_name => {
+                                                let investment_amount = values[project_name] || 0;
+    
+                                                frappe.call({
+                                                    method: "investor.api.create_sub_contracts",
+                                                    args: {
+                                                        project_name: project_name,
+                                                        investment_amount: investment_amount
+                                                    },
+                                                    callback: function (r) {
+                                                        if (r.message) {
+                                                            let contracts = r.message;
+    
+                                                            contracts.forEach(contract => {
+                                                                let child = frm.add_child("custom_investment_contracts");
+                                                                frappe.model.set_value(child.doctype, child.name, "investor_contract", contract.investor_contract);
+                                                                frappe.model.set_value(child.doctype, child.name, "investor_name", contract.investor_name);
+                                                                frappe.model.set_value(child.doctype, child.name, "investment_amount", contract.investment_amount);
+                                                                frappe.model.set_value(child.doctype, child.name, "contract_type", contract.contract_type);
+                                                            });
+
+                                                            frm.refresh_field("custom_investment_contracts");
+                                                            frappe.show_alert({
+                                                                message: __("Sub Contracts created successfully for {0}.", [project_name]),
+                                                                indicator: 'green'
+                                                            });
+                                                        }
+                                                    }
+                                                });
+                                            });
+    
+                                            funding_dialog.hide();
+                                        }
+                                    });
+    
+                                    funding_dialog.show();
+                                    dialog.dialog.hide();
+                                } else {
+                                    frappe.msgprint(__('Please select at least one project.'));
+                                }
+                            }
+                        });
+                    }
+                );
+            }
+        }
+    });
+    
 
 function createInvestorContract(party_name, investor_account, investment_amount, frm) {
     frappe.call({
